@@ -5,18 +5,32 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@700;900&display=swap" rel="stylesheet">
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-  <% if notice %>
-    <p class="notice"><%= notice %></p>
+  
+  <% if user_signed_in? %>
+  <nav>
+    <ul>
+      <li><%= link_to current_user.email, edit_user_registration_path %></li>
+      <li>Offers</li>
+      <li>New listing</li>
+      <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
+    </ul>
+  </nav>
   <% end %>
-  <% if alert %>
-    <p class="alert"><%= alert %></p>
-  <% end %>
+  <div class="h-center">
+    <% if notice %>
+      <p class="notice"><%= notice %></p>
+    <% end %>
+    <% if alert %>
+      <p class="alert"><%= alert %></p>
+    <% end %>
+  <div class="h-center">
     <%= yield %>
   </body>
 </html>

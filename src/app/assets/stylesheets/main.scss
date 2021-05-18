@@ -1,3 +1,118 @@
 // Place all the styles related to the main controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+
+// light theme
+$bg-main-light: rgb(241, 240, 247);
+$bg-nav-light: rgb(212, 211, 223);
+$fc-dark: rgb(49, 49, 49);
+
+// dark theme
+$fc-input-placeholder-light: rgb(74, 81, 88);
+$bg-main-dark: rgb(56, 54, 64);
+$fc-light: rgb(195, 195, 201);
+$bg-nav-dark: rgb(57, 51, 51);
+$bg-input-dark: rgb(127, 133, 147);
+
+
+
+
+* {
+    color: $fc-dark;
+    font-family: 'Noto Sans JP', sans-serif;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+nav {
+    ul {
+        li {
+            font-size: 12px;
+            padding: 1rem 0 1rem 0;
+            white-space: nowrap;
+            overflow: hidden;
+            max-width: 35%;
+            text-overflow: ellipsis;
+        }
+        padding: 0;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+    }
+    background-color: $bg-nav-light;
+}
+
+h1 {
+    font-weight: 900;
+}
+
+body {
+    background-color: $bg-main-light;
+}
+
+.align-right {
+    text-align: right;
+}
+
+.h-center, form, .field {
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.field {
+    margin-bottom: 2rem;
+    margin-left: 3rem;
+    margin-right: 3rem;
+    text-align: center;
+}
+
+.field br {
+    display:none;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active
+{
+ -webkit-box-shadow: 0 0 0 30px rgb(189, 187, 196) inset !important;
+ box-shadow: 0 0 0 30px rgb(189, 187, 196) inset !important;
+}
+
+@media (prefers-color-scheme: dark) {
+    
+    body {
+      background-color: $bg-main-dark !important;
+    }
+
+    * {
+        color: $fc-light;
+    }
+
+    nav {
+        background-color: $bg-nav-dark;
+    }
+
+    input, input:valid {
+        background-color: $bg-input-dark;
+        color: $fc-dark;
+    }
+    ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+        color: $fc-input-placeholder-light;
+        opacity: 1; /* Firefox */
+      }
+      
+      :-ms-input-placeholder { /* Internet Explorer 10-11 */
+        color: $fc-input-placeholder-light;
+      }
+      
+      ::-ms-input-placeholder { /* Microsoft Edge */
+        color: $fc-input-placeholder-light;
+      }
+
+  }
