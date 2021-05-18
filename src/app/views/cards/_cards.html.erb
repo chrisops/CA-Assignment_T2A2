@@ -1,0 +1,9 @@
+<div class="space" id="cards">
+    <% @cards.each do |card| %>
+        <div class="h-center card">
+            <%# TODO replace placeholder for cloudinary image upload %>
+            <img src="http://via.placeholder.com/120x180" alt="placeholder image">
+            <span><p><%= card.condition %> <%= card.name %></p></span><span><p>Price: $<%= card.price %></p></span>
+        </div>
+    <% end %>
+</div>

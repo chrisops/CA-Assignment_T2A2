@@ -10,9 +10,9 @@ $fc-dark: rgb(49, 49, 49);
 
 // dark theme
 $fc-input-placeholder-light: rgb(74, 81, 88);
-$bg-main-dark: rgb(56, 54, 64);
-$fc-light: rgb(195, 195, 201);
-$bg-nav-dark: rgb(57, 51, 51);
+$bg-main-dark: rgb(47, 47, 52);
+$fc-light: rgb(214, 214, 224);
+$bg-nav-dark: rgb(57, 57, 62);
 $bg-input-dark: rgb(127, 133, 147);
 
 
@@ -31,19 +31,36 @@ body {
 nav {
     ul {
         li {
+            a{
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
             font-size: 12px;
-            padding: 1rem 0 1rem 0;
-            white-space: nowrap;
-            overflow: hidden;
-            max-width: 35%;
-            text-overflow: ellipsis;
+            padding: 0.5rem 0 0.5rem 0;
+            max-width: 30%;
+            display:flex;
+            flex-direction: column;
+            justify-content: center;
         }
+        border-bottom: 1px solid lighten($bg-nav-dark, 6%);
+        margin-top: 0;
         padding: 0;
         display: flex;
         flex-direction: row;
         justify-content: space-around;
     }
     background-color: $bg-nav-light;
+}
+
+#headingnav {
+    max-width: 100%;
+}
+
+.headingtext {
+    font-size: 22px;
+    text-decoration: none;
+    color: rgb(175, 207, 247);
 }
 
 h1 {
@@ -62,6 +79,34 @@ body {
     display:flex;
     flex-direction: column;
     align-items: center;
+    flex-wrap: wrap;
+}
+
+.flex-start {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+#cards {
+    width: 90%;
+    min-height: 74vh;
+    background-color: $bg-nav-dark;
+    flex-wrap: wrap;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.card {
+    margin: 0.4rem;
+}
+
+.w-100 {
+    width: 100%;
 }
 
 .field {

@@ -12,17 +12,21 @@
   </head>
 
   <body>
-  
-  <% if user_signed_in? %>
-  <nav>
-    <ul>
-      <li><%= link_to current_user.email, edit_user_registration_path %></li>
-      <li>Offers</li>
-      <li>New listing</li>
-      <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
-    </ul>
-  </nav>
-  <% end %>
+
+    <nav>
+      <ul>
+        <li id="headingnav"><%= link_to "TCboard", root_path, { :class => "headingtext"} %></li>
+        <% if user_signed_in? %>
+          <li><%= link_to current_user.email, edit_user_registration_path %></li>
+          <li><%= link_to "New listing", new_card_path(current_user.id) %> </li>
+          <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
+        <% else %>
+          <li><%= link_to "Log in", new_user_session_path %></li>
+          <li><%= link_to "Sign up", new_user_registration_path %></li>
+        <% end %>
+      </ul>
+    </nav>
+
   <div class="h-center">
     <% if notice %>
       <p class="notice"><%= notice %></p>
@@ -30,7 +34,10 @@
     <% if alert %>
       <p class="alert"><%= alert %></p>
     <% end %>
-  <div class="h-center">
+    <%= flash[:errors] %>
+  </div>
+  <main class="h-center">
     <%= yield %>
+  </main>
   </body>
 </html>
