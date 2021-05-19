@@ -3,7 +3,13 @@
         <div class="h-center card">
             <%# TODO replace placeholder for cloudinary image upload %>
             <img src="http://via.placeholder.com/120x180" alt="placeholder image">
-            <span><p><%= card.condition %> <%= card.name %></p></span><span><p>Price: $<%= card.price %></p></span>
+            <div style="text-align: center;">
+            <% if card.condition %>
+                <span class="<%= card.condition.downcase %> small-text"><%= card.condition %> &nbsp;&nbsp;</span>
+            <% end %>
+                <span><%= link_to card.name, card_path(card) %></span>
+            </div>
+            <p>$<%= '%.2f' % card.price %></p>
         </div>
     <% end %>
 </div>

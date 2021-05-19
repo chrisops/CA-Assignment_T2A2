@@ -5,7 +5,9 @@ Rails.application.routes.draw do
   root to: 'cards#index'
   get '/users/:id/account', to: 'main#account', as: 'user_account'
   get '/cards/new', to: 'cards#new', as: 'new_card'
+  get '/card/:id/edit', to: 'cards#edit', as: 'edit_card'
   get '/cards/:id', to: 'cards#show', as: 'card'
   get '/cards', to: 'cards#index', as: 'cards'
   post '/cards', to: 'cards#create'
+  delete '/cards/:id', to: 'cards#destroy'
 end

@@ -5,3 +5,81 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+Card.delete_all
+
+cards = [
+    {
+        name: "Reliquary Tower",
+        price: 4.50,
+        qty: 4,
+        condition: 'NM',
+        user: User.first
+    },
+    {
+        name: "Command Tower",
+        price: 8.40,
+        qty: 1,
+        condition: 'LP',
+        user: User.first
+    },
+    {
+        name: "Island",
+        price: 2.50,
+        qty: 26,
+        condition: 'NM',
+        user: User.first
+    },
+    {
+        name: "Mountain",
+        price: 2.50,
+        qty: 30,
+        condition: 'NM',
+        user: User.first
+    },
+    {
+        name: "Forest",
+        price: 2.50,
+        qty: 26,
+        condition: 'NM',
+        user: User.first
+    },
+    {
+        name: "Plains",
+        price: 2.50,
+        qty: 24,
+        condition: 'NM',
+        user: User.first
+    },
+    {
+        name: "Gaea's Cradle",
+        price: 1200.00,
+        qty: 1,
+        condition: 'HP',
+        user: User.first
+    },
+    {
+        name: "Memory Jar",
+        price: 83.99,
+        qty: 4,
+        condition: 'LP',
+        user: User.first
+    },
+    {
+        name: "Sol ring",
+        price: 7.90,
+        qty: 7,
+        condition: 'LP',
+        user: User.first
+    },
+    {
+        name: "Cyclonic Rift",
+        price: 24.50,
+        qty: 1,
+        condition: 'NM',
+        user: User.first
+    },
+
+]
+
+Card.create(cards)

@@ -1,12 +1,19 @@
 <div class="h-center">
-    <img src="http://via.placeholder.com/173x260" alt="placeholder image">
-</div>
-<div class="h-center">
     <h1> <%= @card.name %> </h1>
-    <p>Condition: <%= @card.condition %></p>
-    <p>Price: $<%= @card.price %> </p>
-    <p>Listed by: <%= @card.user.email %>
+    <br>
+    <img src="http://via.placeholder.com/173x260" alt="placeholder image">
+    <br>
+    <p>Condition: <span class="<%= @card.condition.downcase %>"><%= @condition %></span></p>
+    <p>Price: $<%= '%.2f' % @card.price %> </p>
+    <p>Listed by: <%= link_to @card.user.email,  user_account_path(@card.user.id) %>
 </div>
+<br>
+<% if @card.user == @user %>
+    <div><%= link_to "Edit", edit_card_path(@card) %> | <%= link_to "Delete", @card, method: 'delete', data: {confirm: "Delete #{@card.name}?"} %></div>
+<% end %>
+<br>
+<br>
+<%= link_to "Back", :back %>
 
 
     
