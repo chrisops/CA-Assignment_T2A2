@@ -52,13 +52,6 @@ cards = [
         user: User.first
     },
     {
-        name: "Gaea's Cradle",
-        price: 1200.00,
-        qty: 1,
-        condition: 'HP',
-        user: User.first
-    },
-    {
         name: "Memory Jar",
         price: 83.99,
         qty: 4,
@@ -76,6 +69,13 @@ cards = [
         name: "Cyclonic Rift",
         price: 24.50,
         qty: 1,
+        condition: 'NM',
+        user: User.first
+    },
+    {
+        name: "Swamp",
+        price: 2.50,
+        qty: 23,
         condition: 'NM',
         user: User.first
     },

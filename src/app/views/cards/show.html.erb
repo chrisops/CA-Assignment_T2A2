@@ -10,10 +10,28 @@
 <br>
 <% if @card.user == @user %>
     <div><%= link_to "Edit", edit_card_path(@card) %> | <%= link_to "Delete", @card, method: 'delete', data: {confirm: "Delete #{@card.name}?"} %></div>
+<% elsif user_signed_in? %>
+    <button data-stripe="payment" type="button">Buy now</button><span>With cash: $<%= '%.2f' % @card.price %></span>
+<% else %>
+    <%= link_to '<button type="button">Buy now</button>'.html_safe, new_user_session_path %><span>With cash: $<%= '%.2f' % @card.price %></span>
 <% end %>
 <br>
 <br>
 <%= link_to "Back", :back %>
+
+<%# Stripe payment gateway logic %>
+<script src="https://js.stripe.com/v3/"></script>
+
+<script>
+    document.querySelector("[data-stripe='payment']").addEventListener("click", () => {
+        const stripe = Stripe("<%= Rails.application.credentials.dig(:stripe, :secret_key) %>")
+        stripe.redirectToCheckout({
+            sessionId: "<%= @session_id %>"
+        });
+    });
+</script>
+
+
 
 
     

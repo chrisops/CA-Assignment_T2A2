@@ -31,6 +31,15 @@ body {
     padding: 0;
 }
 
+.error {
+    font-size: 20px;
+    color: rgb(224, 161, 136);
+}
+.success {
+    font-size: 20px;
+    color: rgb(173, 216, 158);
+}
+
 nav {
     ul {
         li {
@@ -150,6 +159,11 @@ body {
     display:none;
 }
 
+button:hover {
+    cursor: pointer;
+    
+}
+
 input:-webkit-autofill,
 input:-webkit-autofill:hover, 
 input:-webkit-autofill:focus, 
@@ -180,6 +194,12 @@ input:-webkit-autofill:active
         background-color: $bg-nav-dark;
     }
 
+    button {
+        background-color: $fc-light;
+        color: $fc-dark;
+    }
+
+
     input, input:valid {
         background-color: $bg-input-dark;
         color: $fc-dark;
@@ -197,4 +217,22 @@ input:-webkit-autofill:active
         color: $fc-input-placeholder-light;
       }
 
+  }
+
+@media (min-width: 1281px) {
+  
+    /* Desktop */
+    .card {
+        width: 18%;
+    }
+    
+}
+
+@media (min-width: 768px) and (max-width: 1280px) {
+  
+    /* Tablet */
+    .card {
+        width: 20%;
+    }
+    
   }

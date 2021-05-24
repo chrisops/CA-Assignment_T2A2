@@ -8,8 +8,8 @@ class MainController < ApplicationController
 
     def account
         @user = current_user
-        @id = params[:id]
-        @cards = @user.cards
+        @user_viewed = User.find(params[:id])
+        @cards = @user_viewed.cards
     end
 
     private
