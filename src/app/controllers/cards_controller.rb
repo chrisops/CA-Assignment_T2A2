@@ -1,7 +1,8 @@
 class CardsController < ApplicationController
-    before_action :authenticate_user!, only: [:new, :create, :delete, :edit, :update]
-    before_action :get_logged_in_user, only: [:new, :index, :show, :create, :edit, :update]
-    before_action :get_card_from_params, only: [:show, :destroy, :edit, :update]
+    before_action :authenticate_user!, only: [:new, :create, :delete, :edit, :update, :checkout]
+    before_action :get_logged_in_user, only: [:new, :index, :show, :create, :edit, :update, :checkout]
+    before_action :get_card_from_params, only: [:show, :destroy, :edit, :update, :checkout]
+    
     @@card_condition = {
         "NM" => "Near Mint",
         "LP" => "Lightly Played",
@@ -13,33 +14,40 @@ class CardsController < ApplicationController
         @card = Card.new
     end
 
-    def show
-        @condition = @@card_condition[@card.condition]
+    def checkout
+        
         if user_signed_in?
-            session = Stripe::Checkout::Session.create(
+            Stripe.api_key = ENV['STRIPE_SECRET']
+            session = Stripe::Checkout::Session.create({
                 payment_method_types: ['card'],
                 customer_email: @user[:email],
                 line_items: [{
-                    name: @card.name,
-                    description: "TCboard: #{@card.name} - #{@condition}: $#{@card.price}",
-                    amount: (@card.price * 100).to_i,
-                    currency: 'aud',
+                    price_data: {
+                        currency: 'aud',
+                        product_data: {
+                            name: @card.name
+                        },
+                        unit_amount: (@card.price * 100).to_i
+                    },
                     quantity: @card.qty
                 }],
-                payment_intent_data: {
-                    metadata: {
-                        card_id: @card.id
-                    }
-                },
+                mode: 'payment',
                 success_url: "#{root_url}payments/success?cardId=#{@card.id}",
                 cancel_url: "#{root_url}cards"
-            )
-            @session_id = session.id
+            })
+
+            render json: session
+            # @session_id = session.id
         end
     end
 
+    def show
+        @condition = @@card_condition[@card.condition]
+    end
+
     def index
-        @cards = Card.order('id DESC')
+        @cards = Card.search(params[:search]).page(params[:page])
+        @search_path = cards_path
     end
 
     def edit
@@ -52,13 +60,16 @@ class CardsController < ApplicationController
     def update
         if @card.user != @user
             flash.now[:errors] = "You can't edit another user's listing"
-            redirect_to @card
+            show
+            render action: 'show'
         else
             if @card.update(card_params)
                 flash.now[:errors] = "Updated successfully"
+                show
                 render action: 'show'
             else
                 flash.now[:errors] = @card.errors.full_messages
+                show
                 render action: 'show'
             end
         end
@@ -70,6 +81,7 @@ class CardsController < ApplicationController
             redirect_to cards_path
         else
             flash.now[:errors] = "You can't delete a card you don't own"
+            index
             render action: 'index'
         end
     end
@@ -80,6 +92,7 @@ class CardsController < ApplicationController
             redirect_to @card
         else
             flash.now[:errors] = @card.errors.full_messages
+            new
             render action: 'new'
         end
     end
@@ -87,7 +100,7 @@ class CardsController < ApplicationController
     private
 
     def card_params
-        fields = params.require(:card).permit(:name, :price, :condition, :user_id, :qty)
+        fields = params.require(:card).permit(:name, :price, :condition, :user_id, :qty, :card_image, :search)
         fields[:user] = current_user
         return fields
     end
@@ -95,4 +108,5 @@ class CardsController < ApplicationController
     def get_card_from_params
         @card = Card.find(params[:id])
     end
+
 end

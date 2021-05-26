@@ -15,12 +15,16 @@ $fc-light: rgb(214, 214, 224);
 $fc-light-link: rgb(187, 187, 209);
 $bg-nav-dark: rgb(57, 57, 62);
 $bg-input-dark: rgb(127, 133, 147);
-$fc-nm: rgb(132, 206, 141);
-$fc-lp:rgb(168, 198, 108);
-$fc-mp:rgb(208, 190, 109);
-$fc-hp:rgb(198, 138, 103);
+$fc-nm: rgb(68, 118, 74);
+$fc-lp:rgb(108, 125, 74);
+$fc-mp:rgb(132, 121, 76);
+$fc-hp:rgb(111, 82, 65);
+$heading-light: rgb(85, 132, 189);
 
-
+p {
+    font-size: 12px;
+    margin: 2px;
+}
 * {
     color: $fc-dark;
     font-family: 'Noto Sans JP', sans-serif;
@@ -78,7 +82,7 @@ nav {
 .headingtext {
     font-size: 22px;
     text-decoration: none;
-    color: rgb(175, 207, 247);
+    color: $heading-light;
 }
 
 h1 {
@@ -111,7 +115,7 @@ body {
 #cards {
     width: 90%;
     min-height: 74vh;
-    background-color: $bg-nav-dark;
+    background-color: $bg-nav-light;
     flex-wrap: wrap;
     display:flex;
     flex-direction: row;
@@ -185,6 +189,9 @@ input:-webkit-autofill:active
     body {
       background-color: $bg-main-dark !important;
     }
+    #cards {
+        background-color: $bg-nav-dark;
+    }
 
     * {
         color: $fc-light;
@@ -200,7 +207,7 @@ input:-webkit-autofill:active
     }
 
 
-    input, input:valid {
+    input, input:valid, textarea {
         background-color: $bg-input-dark;
         color: $fc-dark;
     }
@@ -219,20 +226,31 @@ input:-webkit-autofill:active
 
   }
 
+
+@media (min-width: 768px) {
+  
+    /* Tablet */
+    .card {
+        width: 20%;
+    }
+    a {
+        font-size: 20px;
+    }
+    span, p {
+        font-size: 18px;
+    }
+    .small-text {
+        font-size: 12px;
+    }
+    
+  }
+
+  
 @media (min-width: 1281px) {
   
     /* Desktop */
     .card {
         width: 18%;
     }
-    
-}
 
-@media (min-width: 768px) and (max-width: 1280px) {
-  
-    /* Tablet */
-    .card {
-        width: 20%;
-    }
-    
-  }
+}
